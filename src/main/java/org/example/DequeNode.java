@@ -1,3 +1,4 @@
+package org.example;
 
 /**
  * Class representing a node of a double-ended queue (deque). Each node has pointers to the next and
