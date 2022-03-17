@@ -19,7 +19,9 @@ DequeNode:
        * setPrevious
 
     *GETTERS
-
+       * getItem
+       * getPrevious
+       * getNext
 
     *BOOLEAN
         * isFirstNode  return true
@@ -28,3 +30,7 @@ DequeNode:
         * isLastNode   return false
         * isNotATerminalNode return true
         * isNotATerminalNode return false
+
+    *CONSTRUCTOR
+        * new DequeNode();
+
