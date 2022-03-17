@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
-    private ArrayList <DequeNode> nodes;
+    private ArrayList <DequeNode<T>> nodes;
 
     public DoubleLinkedListQueue(){
       nodes = new ArrayList();
@@ -15,6 +15,8 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public void append(DequeNode node) {
         if (node.getItem() != null )nodes.add(node);
     }
+
+
 
     @Override
     public void appendLeft(DequeNode node) {
