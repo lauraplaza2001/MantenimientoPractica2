@@ -1,0 +1,14 @@
+DequeNode:
+    constructor:
+       1)previousNode = null -> isFirstNode()
+       2)nextNode = null -> isLastNode()
+       3)previousNode != null -> !isFirstNode()
+       4)nextNode != null -> !isLastNode()
+
+   5)setNext(item)-> next == item
+   6)setPrevious(item)->previous == item
+   7)getNext()-> next
+   8)getPrevious()-> previous
+
+
+
