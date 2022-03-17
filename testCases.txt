@@ -1,17 +1,4 @@
-DequeNode:
-    constructor:
-       1)previousNode = null -> isFirstNode()
-       2)nextNode = null -> isLastNode()
-       3)previousNode != null -> !isFirstNode()
-       4)nextNode != null -> !isLastNode()
-
-   5)setNext(item)-> next == item
-   6)setPrevious(item)->previous == item
-
-   7)getNext()-> next
-   8)getPrevious()-> previous
-
-
+DEQUENODE:
 
     *SETTER
        * setItem
@@ -34,3 +21,16 @@ DequeNode:
     *CONSTRUCTOR
         * new DequeNode();
 
+DOUBLELINKEDLISTQUEUE:
+
+    * peekFirst() return null when the queue is empty
+    * peekFirst() return the element when the queue is not empty
+    * peekLast() return null when the queue is empty
+    * peekLast() return the element when the queue is not empty
+    * size() return 0  empty queue
+    * size() return n not empty queue
+    * deleteFirst() raise exception when the queue is empty
+    * deleteFirst() delete the element correctly
+    * deleteLast()  raise exception when the queue is empty
+    * deleteLast()  delete the element correctly
+    * deleteNode()
