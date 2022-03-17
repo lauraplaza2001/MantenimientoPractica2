@@ -25,9 +25,9 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         if (node.getItem() != null){
 
             if ( size == 0){
-                firstNode = node;
-                lastNode = node;
-                size++;
+                setFirstNode(node);
+                setLastNode(node);
+
             }else{
                 DequeNode oldLastNode = lastNode;
 
@@ -52,9 +52,9 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public void appendLeft(DequeNode node) {
         if (node.getItem() != null){
             if (size == 0){
-                firstNode = node;
-                lastNode = node;
-                size++;
+                setFirstNode(node);
+                setLastNode(node);
+
             }else{
                 DequeNode oldFirstNode = firstNode;
 
