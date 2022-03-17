@@ -1,3 +1,4 @@
+import org.example.DequeNode;
 import org.example.DoubleEndedQueue;
 
 import java.util.ArrayList;
