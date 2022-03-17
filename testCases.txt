@@ -7,8 +7,24 @@ DequeNode:
 
    5)setNext(item)-> next == item
    6)setPrevious(item)->previous == item
+
    7)getNext()-> next
    8)getPrevious()-> previous
 
 
 
+    *SETTER
+       * setItem
+       * setNext
+       * setPrevious
+
+    *GETTERS
+
+
+    *BOOLEAN
+        * isFirstNode  return true
+        * isFirstNode  return false
+        * isLastNode   return true
+        * isLastNode   return false
+        * isNotATerminalNode return true
+        * isNotATerminalNode return false
