@@ -1,12 +1,15 @@
 package org.example;
 
+import org.example.DequeNode;
 import org.example.DoubleEndedQueue;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 
+
 public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
+
 
     private DequeNode firstNode;
     private DequeNode lastNode;
@@ -20,8 +23,10 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         size = 0;
     }
 
+  
     @Override
     public void append(DequeNode node) {
+
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
 
@@ -56,6 +61,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
                 node.setNext(oldFirstNode);
                 setFirstNode(node);
             }
+
     }
 
     @Override
@@ -89,6 +95,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public DequeNode peekFirst() {
+
         return firstNode;
     }
 

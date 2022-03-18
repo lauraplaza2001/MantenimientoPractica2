@@ -1,10 +1,4 @@
 DEQUENODE:
-
-    *SETTER
-       * setItem
-       * setNext
-       * setPrevious
-
     *GETTERS
        * getItem
        * getPrevious
@@ -40,4 +34,25 @@ DOUBLELINKEDLISTQUEUE:
     * appendLeft emtpy queue and first and last node are the same
     * appendLeft() que el primero sea el nuevo
     * appendLeft() que el siguiente del nuevoPrimero sea el antiguo primero
+
+    *SETTER
+       * setItem
+       * setNext
+       * setPrevious
+
+    *GETTERS
+       * getItem
+       * getPrevious
+       * getNext
+
+    *BOOLEAN
+        * isFirstNode  return true
+        * isFirstNode  return false
+        * isLastNode   return true
+        * isLastNode   return false
+        * isNotATerminalNode return true
+        * isNotATerminalNode return false
+
+    *CONSTRUCTOR
+        * new DequeNode();
 
