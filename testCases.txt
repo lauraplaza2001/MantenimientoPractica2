@@ -33,4 +33,11 @@ DOUBLELINKEDLISTQUEUE:
     * deleteFirst() delete the element correctly
     * deleteLast()  raise exception when the queue is empty
     * deleteLast()  delete the element correctly
-    * deleteNode()
+    * deleteNode()  raise exception when the queue is empty
+    * append()  que el ultimo sea el nuevo
+    * append() que el anterior del ultimo, sea el antiguo ultimo
+    * append() empty queue and first and last are the same
+    * appendLeft emtpy queue and first and last node are the same
+    * appendLeft() que el primero sea el nuevo
+    * appendLeft() que el siguiente del nuevoPrimero sea el antiguo primero
+
