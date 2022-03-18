@@ -3,6 +3,7 @@ package org.example;
 import org.example.DoubleEndedQueue;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
@@ -117,5 +118,25 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public DequeNode getAt(int position) {
+        return null;
+    }
+
+    @Override
+    public DequeNode find(Object item) {
+        return null;
+    }
+
+    @Override
+    public void delete(DequeNode node) {
+
+    }
+
+    @Override
+    public void sort(Comparator comparator) {
+
     }
 }
