@@ -38,14 +38,6 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         }
 
     }
-    private void  setLastNode(DequeNode node){
-        size++;
-        if (node.getNext() != null){
-            this.lastNode = node;
-        } else{
-            setLastNode(node.getNext());
-        }
-    }
 
 
     @Override
@@ -66,14 +58,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
         }
     }
-    private void  setFirstNode(DequeNode node){
-        size++;
-        if (node.getPrevious() != null){
-            this.lastNode = node;
-        } else{
-            setLastNode(node.getPrevious());
-        }
-    }
+
     @Override
     public void deleteFirst() {
         if (this.size() >0){
@@ -85,11 +70,6 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         }
         size--;
 
-    }
-    private void deleteNode(DequeNode node){
-        node.setNext(null);
-        node.setPrevious(null);
-        node.setItem(null);
     }
 
     @Override
@@ -118,4 +98,33 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public int size() {
         return size;
     }
+
+
+
+    // PRIVATE
+    private void  setFirstNode(DequeNode node){
+        size++;
+        if (node.getPrevious() != null){
+            this.lastNode = node;
+        } else{
+            setLastNode(node.getPrevious());
+        }
+    }
+
+
+    private void  setLastNode(DequeNode node){
+        size++;
+        if (node.getNext() != null){
+            this.lastNode = node;
+        } else{
+            setLastNode(node.getNext());
+        }
+    }
+
+    private void deleteNode(DequeNode node){
+        node.setNext(null);
+        node.setPrevious(null);
+        node.setItem(null);
+    }
+
 }
