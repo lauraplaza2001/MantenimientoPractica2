@@ -65,18 +65,19 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public void deleteFirst() {
-  if (this.size() <=0) throw new RuntimeException("size is 0");
-            if (this.size == 1){
-                firstNode = null;
-                lastNode = null;
+        if (this.size() <=0) throw new RuntimeException("size is 0");
+        if (this.size == 1){
+            firstNode = null;
+            lastNode = null;
 
-            }else{
-                DequeNode oldFirstNode = firstNode;
-                DequeNode newFirstNode = firstNode.getNext();
+        }else{
+            DequeNode oldFirstNode = firstNode;
+            DequeNode newFirstNode = firstNode.getNext();
 
-                newFirstNode.setPrevious(null); //Now is first node
-                deleteNode(oldFirstNode); //clean memory
-            }
+            newFirstNode.setPrevious(null); //Now is first node
+            this.firstNode = newFirstNode;
+            deleteNode(oldFirstNode); //clean memory
+        }
         size--;
 
     }
@@ -86,19 +87,19 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public void deleteLast() {
-         if (this.size() <=0) throw new RuntimeException("size is 0");
-            if (this.size == 1 ){
-                firstNode = null;
-                lastNode = null;
-            }else{
-                DequeNode  oldLastNode = lastNode;
-                DequeNode  newLastNode = lastNode.getPrevious();
+        if (this.size() <=0) throw new RuntimeException("size is 0");
+        if (this.size == 1 ){
+            firstNode = null;
+            lastNode = null;
+        }else{
+            DequeNode  oldLastNode = lastNode;
+            DequeNode  newLastNode = lastNode.getPrevious();
 
-                newLastNode.setNext(null); //Now is last node
-                deleteNode(oldLastNode); //clean memory
-            }
+            newLastNode.setNext(null); //Now is last node
+            this.lastNode = newLastNode;
+            deleteNode(oldLastNode); //clean memory
+        }
         size--;
-    }
     }
 
     @Override
