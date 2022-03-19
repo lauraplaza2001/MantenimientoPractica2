@@ -109,7 +109,7 @@ class DoubleLinkedListQueueTest {
 
 
     @Test
-    public void testDeleteLastThrowsExcepcionIfSizeIsZero(){
+    public void testDeleteLastThrowsExceptionIfSizeIsZero(){
         assertThrows(RuntimeException.class, ()->queue.deleteLast());
     }
     @Test
