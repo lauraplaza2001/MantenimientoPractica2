@@ -35,7 +35,7 @@ class DoubleLinkedListQueueTest {
     }
     @Test
     public void testPeekFirstReturnNullIfEmptyQueue(){
-        assertEquals(null,queue.peekFirst());
+        assertNull(queue.peekFirst());
     }
 
     @Test
@@ -48,7 +48,7 @@ class DoubleLinkedListQueueTest {
 
     @Test
     public void testPeekLastReturnNullIfEmptyQueue(){
-        assertEquals(null,queue.peekLast());
+        assertNull(queue.peekLast());
     }
 
     @Test
@@ -62,15 +62,48 @@ class DoubleLinkedListQueueTest {
 
 
 
+    @Test
+    public void testDeleteFirstDeleteElementCorrectly(){
+        DequeNode<Integer> newNode = new DequeNode(1,null,null);
+        DequeNode<Integer> node1 = new DequeNode(1,null,null);
 
+        queue.append(newNode);
+        queue.append(node1);
+        queue.deleteFirst();
 
+        int sizeExpected= 1;
+        int sizeObtained = queue.size();
+        assertEquals(sizeExpected,sizeObtained);
+        assertEquals(queue.peekFirst(),node1);
+    }
 
+    @Test
+    public void testDeleteFirstWhenThereIsOnlyOneElement(){
+        DequeNode<Integer> newNode = new DequeNode(1,null,null);
+        queue.append(newNode);
+        queue.deleteFirst();
 
+        int sizeExpected= 0;
+        int sizeObtained = queue.size();
 
+        assertEquals(sizeExpected,sizeObtained);
+        assertNull(queue.peekFirst());
+        assertNull(queue.peekLast());
+    }
 
+    @Test
+    public void testDeleteLastWhenThereIsOnlyOneElement(){
+        DequeNode<Integer> newNode = new DequeNode(1,null,null);
+        queue.append(newNode);
+        queue.deleteLast();
 
+        int sizeExpected= 0;
+        int sizeObtained = queue.size();
 
-
+        assertEquals(sizeExpected,sizeObtained);
+        assertNull(queue.peekFirst());
+        assertNull(queue.peekLast());
+    }
 
 
 
@@ -84,155 +117,84 @@ class DoubleLinkedListQueueTest {
         assertThrows(RuntimeException.class, ()->queue.deleteFirst());
     }
     @Test
-    public void testDeleteLastWorksCorrectly(){
+    public void testDeleteLastDeleteElementCorrectly(){
         DequeNode node1 = new DequeNode(3,null,null);
         DequeNode node2 = new DequeNode(5,null,null);
 
         queue.append(node1);
         queue.append(node2);
-        assertEquals(queue.peekFirst(),node1);
-
-    }
-    @Test
-    public void testDeleteLastDecreasesSize(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-
-        queue.append(node1);
-        queue.append(node2);
-
-        int expectedSize = 1;
         queue.deleteLast();
-        assertEquals(expectedSize,queue.size());
-    }
-    @Test
-    public void testDeleteFirstDecreasesSize(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
 
-        queue.append(node1);
-        queue.append(node2);
 
         int expectedSize = 1;
-        queue.deleteFirst();
-        assertEquals(expectedSize,queue.size());
-    }
-    public void testAppendNodeAlreadyLinked(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
+        int obtainedSize = queue.size();
 
-        //Linked nodes
-        node1.setItem(node2);
-        node2.setPrevious(node1);
 
-        assertThrows(RuntimeException.class, ()->queue.append(node1));
-
+        assertEquals(expectedSize,obtainedSize);
+        assertEquals(queue.peekLast(),node1);
     }
 
-    // --append
+
     @Test
     public void testAppendInsertFirstNode(){
         DequeNode node1 = new DequeNode(3,null,null);
         queue.append(node1);
+        int expected = 1;
+        int obtained= queue.size();
 
         assertEquals(queue.peekLast(),node1);
         assertEquals(queue.peekFirst(),node1);
+        assertEquals(expected,obtained);
 
     }
-    @Test
-    public void testAppendInsertsNodeAtTheEnd(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
 
-        queue.append(node1);
-        queue.append(node2);
-
-        assertEquals(queue.peekLast(),node2);
-    }
-    @Test
-    public void testAppendSizeIncrementsCorrectly(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-        int expectedValue = 1;
-
-        queue.append(node1);
-        assertEquals(expectedValue,queue.size());
-
-        queue.append(node2);
-        expectedValue = 2;
-        assertEquals(expectedValue,queue.size());
-    }
-
-    @Test
-    public void testAppendNodeConections(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-
-        queue.append(node1);
-        queue.append(node2);
-
-        assertEquals(node1.getNext(),node2);
-        assertEquals(node2.getPrevious(),node1);
-
-    }
-    //--appendLeft
     @Test
     public void testAppendLeftInsertFirstNode(){
         DequeNode node1 = new DequeNode(3,null,null);
         queue.appendLeft(node1);
+        int expected = 1;
+        int obtained= queue.size();
 
         assertEquals(queue.peekLast(),node1);
         assertEquals(queue.peekFirst(),node1);
-
     }
+
+
+
+
     @Test
-    public void testAppendLeftInsertsNodeAtTheBeginning(){
+    public void testAppendInsertCorrectly(){
+        DequeNode node1 = new DequeNode(3,null,null);
+        DequeNode node2 = new DequeNode(5,null,null);
+
+        queue.append(node1);
+        queue.append(node2);
+
+        int sizeExpected=2;
+        int sizeObtained = queue.size();
+
+        assertEquals(node1.getNext(),node2);
+        assertEquals(node2.getPrevious(),node1);
+        assertEquals(sizeExpected,sizeObtained);
+    }
+
+
+    @Test
+    public void testAppendLeftInsertCorrectly(){
         DequeNode node1 = new DequeNode(3,null,null);
         DequeNode node2 = new DequeNode(5,null,null);
 
         queue.appendLeft(node1);
         queue.appendLeft(node2);
 
-        assertEquals(queue.peekFirst(),node2);
-    }
-    @Test
-    public void testAppendLeftSizeIncrementsCorrectly(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-        int expectedValue = 1;
-
-        queue.appendLeft(node1);
-        assertEquals(expectedValue,queue.size());
-
-        queue.appendLeft(node2);
-        expectedValue = 2;
-        assertEquals(expectedValue,queue.size());
-    }
-
-    @Test
-    public void testAppendLeftNodeConections(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-
-        queue.appendLeft(node1);
-        queue.appendLeft(node2);
+        int sizeExpected=2;
+        int sizeObtained = queue.size();
 
         assertEquals(node2.getNext(),node1);
         assertEquals(node1.getPrevious(),node2);
+        assertEquals(sizeExpected,sizeObtained);
 
     }
 
-    @Test
-    public void testAppendLeftNodeAlreadyLinked(){
-        DequeNode node1 = new DequeNode(3,null,null);
-        DequeNode node2 = new DequeNode(5,null,null);
-
-        //Linked nodes
-        node1.setItem(node2);
-        node2.setPrevious(node1);
-
-        assertThrows(RuntimeException.class, ()->queue.appendLeft(node1));
-
-    }
 
 }

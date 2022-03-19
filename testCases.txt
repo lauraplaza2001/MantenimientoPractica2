@@ -31,9 +31,14 @@ DOUBLELINKEDLISTQUEUE:
     * size() return n not empty queue
     * deleteFirst() raise exception when the queue is empty
     * deleteFirst() delete the element correctly
+    * deleteFirst() change the size correctly
+
+
+
     * deleteLast()  raise exception when the queue is empty
     * deleteLast()  delete the element correctly
-    * deleteNode()  raise exception when the queue is empty
+    * deleteLast() change the size correctly
+
     * append()  que el ultimo sea el nuevo
     * append() que el anterior del ultimo, sea el antiguo ultimo
     * append() empty queue and first and last are the same

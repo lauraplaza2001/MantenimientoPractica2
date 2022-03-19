@@ -20,73 +20,81 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         size = 0;
     }
 
+
     @Override
     public void append(DequeNode node) {
 
-        if (node.getItem() != null){
+        //Node item cant be null even if it has other nodes attached/linked to it.
+        if (node.getItem() == null) throw new RuntimeException("node cant be null");
+         if ( size == 0){
+            firstNode = node;
+            lastNode = node;
 
-            if ( size == 0){
-                setFirstNode(node);
-                setLastNode(node);
+        }else{
+            DequeNode oldLastNode = lastNode;
 
-            }else{
-                DequeNode oldLastNode = lastNode;
-
-                oldLastNode.setNext(node);
-                node.setPrevious(oldLastNode);
-                setLastNode(node);
-            }
+            oldLastNode.setNext(node);
+            node.setPrevious(oldLastNode);
+            lastNode = node;
         }
+        size++;
 
     }
-
 
     @Override
     public void appendLeft(DequeNode node) {
-        if (node.getItem() != null){
-            if (size == 0){
-                setFirstNode(node);
-                setLastNode(node);
+        //Node item cant be null even if it has other nodes attached/linked to it.
+        if (node.getItem() == null) throw new RuntimeException("node cant be null");
 
-            }else{
-                DequeNode oldFirstNode = firstNode;
+        if (size == 0){
+            firstNode = node;
+            lastNode = node;
 
-                oldFirstNode.setPrevious(node);
-                node.setNext(oldFirstNode);
-                setFirstNode(node);
-            }
+        }else{
+            DequeNode oldFirstNode = firstNode;
 
-
+            oldFirstNode.setPrevious(node);
+            node.setNext(oldFirstNode);
+            firstNode = node;
         }
+        size++;
+
     }
+
+
 
     @Override
     public void deleteFirst() {
-        if (this.size() >0){
-            DequeNode oldFirstNode = firstNode;
-            DequeNode newFirstNode = firstNode.getNext();
 
-            newFirstNode.setPrevious(null); //Now is first node
-            deleteNode(oldFirstNode); //clean memory
-        }
+        if (this.size() <=0) throw new RuntimeException("size is 0");
+
+        DequeNode oldFirstNode = firstNode;
+        DequeNode newFirstNode = firstNode.getNext();
+
+        newFirstNode.setPrevious(null); //Now is first node
+        deleteNode(oldFirstNode); //clean memory
+
         size--;
 
     }
 
+
     @Override
     public void deleteLast() {
-        if (this.size() >0){
-            DequeNode  oldLastNode = lastNode;
-            DequeNode  newLastNode = lastNode.getPrevious();
+        if (this.size() <=0) throw new RuntimeException("size is 0");
 
-            newLastNode.setNext(null); //Now is last node
-            deleteNode(oldLastNode); //clean memory
-        }
+        DequeNode  oldLastNode = lastNode;
+        DequeNode  newLastNode = lastNode.getPrevious();
+
+        newLastNode.setNext(null); //Now is last node
+        deleteNode(oldLastNode); //clean memory
+
         size--;
     }
 
     @Override
     public DequeNode peekFirst() {
+
         return firstNode;
     }
 
@@ -120,26 +128,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     }
 
-
-    // PRIVATE
-    private void  setFirstNode(DequeNode node){
-        size++;
-        if (node.getPrevious() != null){
-            this.lastNode = node;
-        } else{
-            setLastNode(node.getPrevious());
-        }
-    }
-
-
-    private void  setLastNode(DequeNode node){
-        size++;
-        if (node.getNext() != null){
-            this.lastNode = node;
-        } else{
-            setLastNode(node.getNext());
-        }
-    }
+    //PRIVATE METHODS
 
     private void deleteNode(DequeNode node){
         node.setNext(null);
