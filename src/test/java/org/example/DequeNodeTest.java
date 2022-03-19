@@ -1,3 +1,5 @@
+package org.example;
+
 import org.example.DequeNode;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
