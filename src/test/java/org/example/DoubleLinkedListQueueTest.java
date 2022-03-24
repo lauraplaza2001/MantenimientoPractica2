@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedListQueueTest {
@@ -293,6 +295,19 @@ class DoubleLinkedListQueueTest {
         assertEquals(newNode3.getPrevious(),newNode);
     }
 
+    @Test
+    public void testSort(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3,null,null);
 
+        queue.append(newNode3);
+        queue.append(newNode);
+        queue.append(newNode2);
+
+        assertThat()
+
+
+    }
 
 }
