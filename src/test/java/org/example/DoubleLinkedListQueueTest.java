@@ -3,10 +3,12 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedListQueueTest {
-    private DoubleLinkedListQueue queue ;
+    private DoubleLinkedListQueue<Integer> queue ;
 
     @BeforeEach
     public void setUp(){
@@ -74,7 +76,7 @@ class DoubleLinkedListQueueTest {
         int sizeExpected= 1;
         int sizeObtained = queue.size();
         assertEquals(sizeExpected,sizeObtained);
-        assertEquals(queue.peekFirst().getItem(),node1.getItem());
+        assertEquals(queue.peekFirst(),node1);
     }
 
     @Test
@@ -131,9 +133,24 @@ class DoubleLinkedListQueueTest {
 
 
         assertEquals(expectedSize,obtainedSize);
-        assertEquals(queue.peekLast().getItem(),node1.getItem());
+        assertEquals(queue.peekLast(),node1);
 
     }
+
+
+    @Test
+    public void testAppendANodeWithOtherNodesLinkedRaiseExcepcion(){
+        DequeNode<Integer> node1 = new DequeNode<>(1,new DequeNode<>(3,null,null),null);
+        assertThrows(RuntimeException.class, () -> queue.append(node1));
+    }
+
+    @Test
+    public void testAppendLeftANodeWithOtherNodesLinkedRaiseExcepcion(){
+        DequeNode<Integer> node1 = new DequeNode<>(1,new DequeNode<>(3,null,null),null);
+        assertThrows(RuntimeException.class, () -> queue.appendLeft(node1));
+    }
+
+
 
 
     @Test
@@ -194,8 +211,123 @@ class DoubleLinkedListQueueTest {
         assertEquals(node2.getNext(),node1);
         assertEquals(node1.getPrevious(),node2);
         assertEquals(sizeExpected,sizeObtained);
+    }
+
+    @Test
+    public void testGetAtPositionSmallerThan0RaiseAnException(){
+        assertThrows(RuntimeException.class, () -> queue.getAt(-2));
+    }
+
+    @Test
+    public void testGetAtPositionGreaterThanSizeRaiseAnException(){
+        queue.append(new DequeNode<>(1,null,null));
+        assertThrows(RuntimeException.class, () -> queue.getAt(5));
+    }
+
+    @Test
+    public void testGetAtPositionReturnCorrectly(){ // index start in 0
+        DequeNode<Integer> expected = new DequeNode<>(1,null,null);
+        queue.append(expected);
+        assertEquals(queue.getAt(0),expected);
+    }
+
+    @Test
+    public void testFindItemNotFoundReturnNull(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        assertNull(queue.find(newNode));
+    }
+
+    @Test
+    public void testFindItemReturnTheItem(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        queue.append(newNode);
+        assertEquals(newNode,queue.find(newNode.getItem()));
+    }
+
+    @Test
+    public void testDeleteANodeNotFoundRaiseAnException(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        assertThrows(RuntimeException.class,()-> queue.delete(newNode));
+    }
+
+    @Test
+    public void testDeleteANodeWhichIsTheFirstDoItCorrectly(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
+
+        queue.append(newNode);
+        queue.append(newNode2);
+
+        queue.delete(newNode);
+
+        assertEquals(queue.peekFirst(),newNode2);
+
 
     }
 
+    @Test
+    public void testDeleteANodeWhichIsTheLastDoItCorrectly(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
+
+        queue.append(newNode);
+        queue.append(newNode2);
+
+        queue.delete(newNode2);
+
+        assertEquals(queue.peekFirst(),newNode);
+    }
+
+
+    @Test
+    public void testDeleteANodeNotFirstNotLastDoItCorrectly(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3,null,null);
+
+        queue.append(newNode);
+        queue.append(newNode2);
+        queue.append(newNode3);
+
+        queue.delete(newNode2);
+
+        assertEquals(newNode.getNext(),newNode3);
+        assertEquals(newNode3.getPrevious(),newNode);
+    }
+
+    @Test
+    public void testSort(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3,null,null);
+
+        queue.append(newNode3);
+        queue.append(newNode);
+        queue.append(newNode2);
+
+        Comparator<Integer> c = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                int n = 0;
+                if (o1 > o2)  n = 1;
+                else if (o1 < o2) n = -1;
+
+                return n;
+            }
+        };
+
+        queue.sort(c);
+
+        // mientras haya elementos, comparamos
+        for (int i = 0 ; i< queue.size()-1 ; i++){
+            int expected = 1;
+
+            assertTrue (c.compare((Integer)queue.getAt(i+1).getItem(),(Integer)queue.getAt(i).getItem()) >= 0 ) ;
+        }
+
+
+
+
+    }
 
 }
