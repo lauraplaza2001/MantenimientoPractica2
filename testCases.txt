@@ -1,6 +1,6 @@
 DEQUENODE:
 
-    *SETTER
+  *SETTER
        * setItem
        * setNext
        * setPrevious

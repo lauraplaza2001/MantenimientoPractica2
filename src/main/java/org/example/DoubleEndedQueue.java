@@ -18,8 +18,6 @@ public interface DoubleEndedQueue<T> {
 
     int size();
 
-
-    // Complex operations
     DequeNode<T> getAt(int position) ;
     DequeNode<T> find (T item) ;
     void delete(DequeNode<T> node) ;

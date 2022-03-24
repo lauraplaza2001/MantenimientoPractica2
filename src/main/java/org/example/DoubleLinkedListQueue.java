@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
+
     private DequeNode firstNode;
     private DequeNode lastNode;
     private int size;
@@ -27,7 +28,9 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
         if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
 
+
         if ( size == 0){
+
             firstNode = node;
             lastNode = node;
 
@@ -70,7 +73,6 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         if (this.size == 1){
             firstNode = null;
             lastNode = null;
-
         }else {
            firstNode.setItem(firstNode.getNext().getItem());
            firstNode.setPrevious(null);
@@ -81,11 +83,10 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     }
 
 
-
-
     @Override
     public void deleteLast() {
         if (this.size() <=0) throw new RuntimeException("size is 0");
+
         if (this.size == 1){
             firstNode= null;
             lastNode  = null;
@@ -141,3 +142,4 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
 
 }
+
