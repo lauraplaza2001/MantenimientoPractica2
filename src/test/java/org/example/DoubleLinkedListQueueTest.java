@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedListQueueTest {
-    private DoubleLinkedListQueue queue ;
+    private DoubleLinkedListQueue<Integer> queue ;
 
     @BeforeEach
     public void setUp(){
@@ -321,9 +321,13 @@ class DoubleLinkedListQueueTest {
         queue.sort(c);
 
         // mientras haya elementos, comparamos
-        while(){
+        for (int i = 0 ; i< queue.size()-1 ; i++){
+            int expected = 1;
 
+            assertTrue (c.compare((Integer)queue.getAt(i+1).getItem(),(Integer)queue.getAt(i).getItem()) >= 0 ) ;
         }
+
+
 
 
     }
