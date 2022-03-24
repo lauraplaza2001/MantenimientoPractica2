@@ -26,7 +26,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
-
+        if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
 
         if ( size == 0){
 
@@ -48,6 +48,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public void appendLeft(DequeNode node) {
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
+        if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
 
         if (size == 0){
             firstNode = node;
@@ -68,15 +69,20 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     @Override
     public void deleteFirst() {
         if (this.size() <=0) throw new RuntimeException("size is 0");
+        DequeNode node = this.firstNode;
         if (this.size == 1){
             firstNode = null;
             lastNode = null;
         }else {
-           firstNode.setItem(firstNode.getNext().getItem());
-           firstNode.setPrevious(null);
-           firstNode.setNext(firstNode.getNext());
+            firstNode = firstNode.getNext();
+            firstNode.setPrevious(null);
         }
+
         size--;
+
+        //Desconectado de la lista
+        node.setNext(null);
+        node.setPrevious(null);
 
     }
 
@@ -84,18 +90,21 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     @Override
     public void deleteLast() {
         if (this.size() <=0) throw new RuntimeException("size is 0");
-
+        DequeNode node = lastNode;
         if (this.size == 1){
             firstNode= null;
             lastNode  = null;
 
 
         }else {
-            lastNode.setItem(lastNode.getPrevious().getItem());
+            lastNode = lastNode.getPrevious();
             lastNode.setNext(null);
-            lastNode.setPrevious(lastNode.getPrevious().getPrevious());
         }
         size--;
+
+        //Desconectado de la lista
+        node.setNext(null);
+        node.setPrevious(null);
 
     }
 
@@ -119,22 +128,89 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public DequeNode getAt(int position) {
-        return null;
+        if (position < 0 || position > this.size) throw new RuntimeException("Index out of bounds");
+        DequeNode sol = firstNode;
+
+        int i = 0;
+        while (i< position) { // si position es 0, no entra en el while
+            sol = sol.getNext();
+            i++;
+        }
+
+        return sol;
     }
 
     @Override
     public DequeNode find(Object item) {
-        return null;
+
+        int i = 0;
+        DequeNode node = firstNode;
+
+        while (i< this.size && !item.equals(node.getItem())){ // si position es 0, no entra en el while
+            node = node.getNext();
+            i++;
+        }
+
+
+        if (i >= this.size){
+            node = null;
+        }
+
+        return node;
 
     }
 
     @Override
     public void delete(DequeNode node) {
 
+        if (find(node.getItem()) == null) throw new RuntimeException("node not in list");
+
+        if (node.getNext() == null) this.deleteLast();
+        else if (node.getPrevious() == null) this.deleteFirst();
+        else{
+            node.getPrevious().setNext(node.getNext());
+            node.getNext().setPrevious(node.getPrevious());
+            this.size--;
+        }
+
+
+        //Lo desconectado de la lista
+
+        node.setPrevious(null);
+        node.setNext(null);
+
+
+
     }
 
     @Override
     public void sort(Comparator comparator) {
+        DoubleLinkedListQueue sortedList = new DoubleLinkedListQueue();
+        int initialSize = this.size;
+        for (int i =0; i < initialSize; i++){ //  Por cada elemento de la nueva lista, vamos a ir insertando los mas pequeños
+            DequeNode menor = this.firstNode;
+            int j = 0;
+
+            while (j < this.size()){ //Se podría sacar fuera por simplicidad
+                DequeNode newNode = this.getAt(j);
+                if (comparator.compare(menor.getItem(),newNode.getItem()) > 0){ // entiendo que da > 0 si el primer elemento es mayor que el segundo
+                    menor = newNode;
+                }
+                j++;
+            } //Obtengo el nodo menor
+
+            this.delete(menor); //borro el nodo menor de la lista, la función de borrado se encarga de quitar los enlaces del nodo
+            sortedList.append(menor);// inserto el nodo menor en la lista ordenada
+
+        }
+
+        //Tendré al final la lista vacía y la lista sortedList llena con los elementos pero de menor a mayor, los inserto de nuevo en la lista
+
+        for (int i = 0; i < sortedList.size(); i++) {//Se podría sacar fuera por simplicidad
+            DequeNode node = sortedList.getAt(i);
+            sortedList.delete(node); //Se borra de sortedList lo que libera sus enlaces
+            this.append(node); //Lo inserto correctamente donde corresponde
+        }
 
     }
 
