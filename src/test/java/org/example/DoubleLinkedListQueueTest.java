@@ -137,6 +137,21 @@ class DoubleLinkedListQueueTest {
 
 
     @Test
+    public void testAppendANodeWithOtherNodesLinkedRaiseExcepcion(){
+        DequeNode<Integer> node1 = new DequeNode<>(1,new DequeNode<>(3,null,null),null);
+        assertThrows(RuntimeException.class, () -> queue.append(node1));
+    }
+
+    @Test
+    public void testAppendLeftANodeWithOtherNodesLinkedRaiseExcepcion(){
+        DequeNode<Integer> node1 = new DequeNode<>(1,new DequeNode<>(3,null,null),null);
+        assertThrows(RuntimeException.class, () -> queue.appendLeft(node1));
+    }
+
+
+
+
+    @Test
     public void testAppendInsertFirstNode(){
         DequeNode node1 = new DequeNode(3,null,null);
         queue.append(node1);
