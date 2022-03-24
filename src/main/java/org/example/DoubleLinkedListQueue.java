@@ -120,17 +120,49 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public DequeNode getAt(int position) {
+        if (position < 0 || position > this.size) throw new RuntimeException("Index out of bounds");
+        DequeNode sol = firstNode;
 
+        int i = 0;
+        while (i< position) { // si position es 0, no entra en el while
+               sol = sol.getNext();
+               i++;
+        }
+
+        return sol;
     }
 
     @Override
     public DequeNode find(Object item) {
-        return null;
+
+        int i = 0;
+        DequeNode node = firstNode;
+
+        while (i< this.size && !item.equals(node.getItem())){ // si position es 0, no entra en el while
+            node = node.getNext();
+            i++;
+        }
+
+
+        if (i >= this.size){
+            node = null;
+        }
+
+        return node;
 
     }
 
     @Override
     public void delete(DequeNode node) {
+        /*
+        DequeNode nodeToDelete = find(node.getItem());
+        if (nodeToDelete == null) throw new RuntimeException("node not in list");
+
+        nodeToDelete.getPrevious().setNext(nodeToDelete.getNext());
+        nodeToDelete.getNext().
+        this.size--;
+*/ //Not finished
+
 
     }
 
