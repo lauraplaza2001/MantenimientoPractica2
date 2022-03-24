@@ -209,8 +209,32 @@ class DoubleLinkedListQueueTest {
         assertEquals(node2.getNext(),node1);
         assertEquals(node1.getPrevious(),node2);
         assertEquals(sizeExpected,sizeObtained);
-
     }
+
+    @Test
+    public void testGetAtPositionSmallerThan0RaiseAnException(){
+        assertThrows(RuntimeException.class, () -> queue.getAt(-2));
+    }
+
+    @Test
+    public void testGetAtPositionGreaterThanSizeRaiseAnException(){
+        queue.append(new DequeNode<>(1,null,null));
+        assertThrows(RuntimeException.class, () -> queue.getAt(5));
+    }
+
+    @Test
+    public void testGetAtPositionReturnCorrectly(){ // index start in 0
+        DequeNode<Integer> expected = new DequeNode<>(1,null,null);
+        queue.append(expected);
+        assertEquals(queue.getAt(0),expected);
+    }
+
+    @Test
+    public void testFindItemNotFoundReturnNull(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        assertNull(queue.find(newNode));
+    }
+
 
 
 }
