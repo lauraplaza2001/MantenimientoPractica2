@@ -185,13 +185,13 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
         for (int i =0; i < this.size; i++){ //  Por cada elemento de la nueva lista, vamos a ir insertando los mas pequeños
             DequeNode menor = this.firstNode;
-            int j = i;
-            while (j < this.size()){ //Se podría sacar fuera por simplicidad
-                DequeNode newNode = this.getAt(j);
+
+            while (i < this.size()){ //Se podría sacar fuera por simplicidad
+                DequeNode newNode = this.getAt(i);
                 if (comparator.compare(menor.getItem(),newNode.getItem()) > 0){ // entiendo que da > 0 si el primer elemento es mayor que el segundo
                     menor = newNode;
                 }
-                j++;
+                i++;
             } //Obtengo el nodo menor
 
             sortedList.append(menor);// inserto el nodo menor en la lista ordenada
