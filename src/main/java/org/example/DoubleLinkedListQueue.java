@@ -26,7 +26,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
-
+        if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
 
         if ( size == 0){
 
@@ -48,6 +48,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public void appendLeft(DequeNode node) {
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
+        if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
 
         if (size == 0){
             firstNode = node;
