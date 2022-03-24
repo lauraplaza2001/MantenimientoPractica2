@@ -206,8 +206,6 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     }
 
 
-    }
-
-
 }
+
 
