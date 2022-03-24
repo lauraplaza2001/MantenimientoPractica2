@@ -29,15 +29,17 @@ DOUBLELINKEDLISTQUEUE:
     * peekLast() return the element when the queue is not empty
     * size() return 0  empty queue
     * size() return n not empty queue
+
     * deleteFirst() raise exception when the queue is empty
-    * deleteFirst() delete the element correctly
-    * deleteFirst() change the size correctly
+    * deleteFirst() with one element delete the element correctly
+    * deleteFirst() with more than one element delete correctly
 
 
 
     * deleteLast()  raise exception when the queue is empty
-    * deleteLast()  delete the element correctly
-    * deleteLast() change the size correctly
+    * deleteLast()  with one element delete the element correctly
+    * deleteLast() with more than one element delete correctly
+
 
     * append()  que el ultimo sea el nuevo
     * append() que el anterior del ultimo, sea el antiguo ultimo
