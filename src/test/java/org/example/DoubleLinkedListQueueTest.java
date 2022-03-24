@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.Comparator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -305,7 +307,23 @@ class DoubleLinkedListQueueTest {
         queue.append(newNode);
         queue.append(newNode2);
 
-        assertThat()
+        Comparator<Integer> c = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                int n = 0;
+                if (o1 > o2)  n = 1;
+                 else if (o1 < o2) n = -1;
+
+                return n;
+            }
+        };
+
+        queue.sort(c);
+
+        // mientras haya elementos, comparamos
+        while(){
+
+        }
 
 
     }
