@@ -235,6 +235,13 @@ class DoubleLinkedListQueueTest {
         assertNull(queue.find(newNode));
     }
 
+    @Test
+    public void testFindItemReturnTheItem(){
+        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
+        queue.append(newNode);
+        assertEquals(newNode,queue.find(newNode.getItem()));
+    }
+
 
 
 }
