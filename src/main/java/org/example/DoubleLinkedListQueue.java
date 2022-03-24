@@ -74,9 +74,11 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
             firstNode = null;
             lastNode = null;
         }else {
-           firstNode.setItem(firstNode.getNext().getItem());
-           firstNode.setPrevious(null);
-           firstNode.setNext(firstNode.getNext());
+            firstNode = firstNode.getNext();
+            firstNode.setPrevious(null);
+         //  firstNode.setItem(firstNode.getNext().getItem());
+          // firstNode.setPrevious(null);
+          // firstNode.setNext(firstNode.getNext());
         }
         size--;
 
@@ -93,9 +95,8 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
 
         }else {
-            lastNode.setItem(lastNode.getPrevious().getItem());
+            lastNode = lastNode.getPrevious();
             lastNode.setNext(null);
-            lastNode.setPrevious(lastNode.getPrevious().getPrevious());
         }
         size--;
 
@@ -151,6 +152,23 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public void delete(DequeNode node) {
+
+        if (find(node.getItem()) == null) throw new RuntimeException("node not in list");
+        if (node.getNext() == null) this.deleteLast();
+        else if (node.getPrevious() == null) this.deleteFirst();
+        else{
+            node.getPrevious().setNext(node.getNext());
+            node.getNext().setPrevious(node.getPrevious());
+            this.size--;
+        }
+
+        //Limpiar nodo
+        /*
+        nodeToDelete.setPrevious(null);
+        nodeToDelete.setNext(null);
+        node.setItem(null);
+        */
+
 
     }
 

@@ -54,8 +54,13 @@ DOUBLELINKEDLISTQUEUE:
     * getAt(int p)  p > size raise an exception
     * getAt(int p) return the element correctly
 
-    * find(Item i) return null if not found
-    * find(Item i) return the DequeNode
+    * find(T item) return null if not found
+    * find(T item) return the DequeNode
+
+    * delete(DequeueNode d)  raise an exception if d not found
+    * delete (DequeueNode d) delete the element correctly (is the first element)
+    * delete (DequeueNode d) delete the element correctly (is the last element)
+    * delete (DequeueNode d) delete the element correctly (is not the first nor the last element)
 
 
 
