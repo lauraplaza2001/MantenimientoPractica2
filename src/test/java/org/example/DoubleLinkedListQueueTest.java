@@ -65,7 +65,7 @@ class DoubleLinkedListQueueTest {
     @Test
     public void testDeleteFirstDeleteElementCorrectly(){
         DequeNode<Integer> newNode = new DequeNode(1,null,null);
-        DequeNode<Integer> node1 = new DequeNode(1,null,null);
+        DequeNode<Integer> node1 = new DequeNode(2,null,null);
 
         queue.append(newNode);
         queue.append(node1);
@@ -74,7 +74,7 @@ class DoubleLinkedListQueueTest {
         int sizeExpected= 1;
         int sizeObtained = queue.size();
         assertEquals(sizeExpected,sizeObtained);
-        assertEquals(queue.peekFirst(),node1);
+        assertEquals(queue.peekFirst().getItem(),node1.getItem());
     }
 
     @Test
@@ -109,7 +109,7 @@ class DoubleLinkedListQueueTest {
 
 
     @Test
-    public void testDeleteLastThrowsExcepcionIfSizeIsZero(){
+    public void testDeleteLastThrowsExceptionIfSizeIsZero(){
         assertThrows(RuntimeException.class, ()->queue.deleteLast());
     }
     @Test
@@ -131,7 +131,8 @@ class DoubleLinkedListQueueTest {
 
 
         assertEquals(expectedSize,obtainedSize);
-        assertEquals(queue.peekLast(),node1);
+        assertEquals(queue.peekLast().getItem(),node1.getItem());
+
     }
 
 
