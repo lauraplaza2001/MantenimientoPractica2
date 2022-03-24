@@ -155,11 +155,19 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     @Override
     public void delete(DequeNode node) {
 
-        DequeNode nodeToDelete = find(node.getItem());
-        if (nodeToDelete == null) throw new RuntimeException("node not in list");
 
-        nodeToDelete.getPrevious().setNext(nodeToDelete.getNext());
-        nodeToDelete.getNext().setPrevious(nodeToDelete.getPrevious());
+        if (find(node.getItem()) == null) throw new RuntimeException("node not in list");
+        if (node.getNext() == null) this.deleteLast();
+        else if (node.getPrevious() == null) this.deleteFirst();
+        else{
+            node.getPrevious().setNext(node.getNext());
+            node.getNext().setPrevious(node.getPrevious());
+            this.size--;
+        }
+
+
+
+
 
         //Limpiar nodo
         /*
@@ -168,14 +176,12 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         node.setItem(null);
         */
 
-        this.size--;
-
-
 
     }
 
     @Override
     public void sort(Comparator comparator) {
+
 
     }
 
