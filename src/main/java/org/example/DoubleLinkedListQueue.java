@@ -120,7 +120,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public DequeNode getAt(int position) {
-        return null;
+
     }
 
     @Override
