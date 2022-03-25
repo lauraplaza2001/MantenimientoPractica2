@@ -27,6 +27,7 @@ DOUBLELINKEDLISTQUEUE:
     * peekFirst() return the element when the queue is not empty
     * peekLast() return null when the queue is empty
     * peekLast() return the element when the queue is not empty
+
     * size() return 0  empty queue
     * size() return n not empty queue
 
@@ -41,10 +42,29 @@ DOUBLELINKEDLISTQUEUE:
     * deleteLast() with more than one element delete correctly
 
 
-    * append()  que el ultimo sea el nuevo
-    * append() que el anterior del ultimo, sea el antiguo ultimo
-    * append() empty queue and first and last are the same
-    * appendLeft emtpy queue and first and last node are the same
-    * appendLeft() que el primero sea el nuevo
-    * appendLeft() que el siguiente del nuevoPrimero sea el antiguo primero
+    * append()  insert the first node
+    * append() insert a node (it is not the first)
+    * append() raise an exception when the node that it has to be appended, is not null
+
+    * appendLeft() raise an exception when the node that it has to be appended, is not null
+    * appendLeft insert the first node
+    * appendLeft() insert a node (not the first one)
+
+    * getAt(int p)   p< 0 raise an exception
+    * getAt(int p)  p > size raise an exception
+    * getAt(int p) return the element correctly
+
+    * find(T item) return null if not found
+    * find(T item) return the DequeNode
+
+    * delete(DequeueNode d)  raise an exception if d not found
+    * delete (DequeueNode d) delete the element correctly (is the first element)
+    * delete (DequeueNode d) delete the element correctly (is the last element)
+    * delete (DequeueNode d) delete the element correctly (is not the first nor the last element)
+
+    * sort(Comparator c) sort correctly
+    * sort (Comparator c )  catch ClassCastException and throw RunTimeException
+
+
+
 
