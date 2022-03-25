@@ -133,8 +133,8 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
         int i = 0;
         while (i< position) { // si position es 0, no entra en el while
-               sol = sol.getNext();
-               i++;
+            sol = sol.getNext();
+            i++;
         }
 
         return sol;
@@ -170,14 +170,13 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         else{
             node.getPrevious().setNext(node.getNext());
             node.getNext().setPrevious(node.getPrevious());
+
             this.size--;
+
+            //Lo desconectado de la lista
+            node.setPrevious(null);
+            node.setNext(null);
         }
-
-
-        //Lo desconectado de la lista
-
-        node.setPrevious(null);
-        node.setNext(null);
 
 
 
@@ -187,15 +186,17 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
     public void sort(Comparator comparator) {
         DoubleLinkedListQueue sortedList = new DoubleLinkedListQueue();
         int initialSize = this.size;
+
         for (int i =0; i < initialSize; i++){ //  Por cada elemento de la nueva lista, vamos a ir insertando los mas pequeños
             DequeNode menor = this.firstNode;
             int j = 0;
 
             while (j < this.size()){ //Se podría sacar fuera por simplicidad
                 DequeNode newNode = this.getAt(j);
-                if (comparator.compare(menor.getItem(),newNode.getItem()) > 0){ // entiendo que da > 0 si el primer elemento es mayor que el segundo
-                    menor = newNode;
-                }
+
+                if (comparator.compare(menor.getItem(), newNode.getItem()) > 0) menor = newNode;
+                //  > 0 si el primer elemento es mayor que el segundo
+
                 j++;
             } //Obtengo el nodo menor
 
@@ -207,8 +208,10 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         //Tendré al final la lista vacía y la lista sortedList llena con los elementos pero de menor a mayor, los inserto de nuevo en la lista
 
         for (int i = 0; i < sortedList.size(); i++) {//Se podría sacar fuera por simplicidad
+
             DequeNode node = sortedList.getAt(i);
             sortedList.delete(node); //Se borra de sortedList lo que libera sus enlaces
+
             this.append(node); //Lo inserto correctamente donde corresponde
         }
 
@@ -216,8 +219,3 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
 
 }
-
-
-
-
-

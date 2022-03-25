@@ -3,12 +3,15 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.Comparator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedListQueueTest {
     private DoubleLinkedListQueue<Integer> queue ;
+
 
     @BeforeEach
     public void setUp(){
@@ -296,10 +299,10 @@ class DoubleLinkedListQueueTest {
     }
 
     @Test
-    public void testSort(){
-        DequeNode<Integer> newNode = new DequeNode<>(1,null,null);
-        DequeNode<Integer> newNode2 = new DequeNode<>(2,null,null);
-        DequeNode<Integer> newNode3 = new DequeNode<>(3,null,null);
+    public void testSort() {
+        DequeNode<Integer> newNode = new DequeNode<>(1, null, null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2, null, null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3, null, null);
 
         queue.append(newNode3);
         queue.append(newNode);
@@ -309,7 +312,7 @@ class DoubleLinkedListQueueTest {
             @Override
             public int compare(Integer o1, Integer o2) {
                 int n = 0;
-                if (o1 > o2)  n = 1;
+                if (o1 > o2) n = 1;
                 else if (o1 < o2) n = -1;
 
                 return n;
@@ -319,15 +322,37 @@ class DoubleLinkedListQueueTest {
         queue.sort(c);
 
         // mientras haya elementos, comparamos
-        for (int i = 0 ; i< queue.size()-1 ; i++){
+        for (int i = 0; i < queue.size() - 1; i++) {
             int expected = 1;
 
-            assertTrue (c.compare((Integer)queue.getAt(i+1).getItem(),(Integer)queue.getAt(i).getItem()) >= 0 ) ;
+            assertTrue(c.compare((Integer) queue.getAt(i + 1).getItem(), (Integer) queue.getAt(i).getItem()) >= 0);
         }
-
-
-
-
     }
 
+
+
+    @Test
+    public void testSortWithWrongComparator() {
+        DequeNode<Integer> newNode = new DequeNode<>(1, null, null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2, null, null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3, null, null);
+
+        queue.append(newNode3);
+        queue.append(newNode);
+        queue.append(newNode2);
+
+
+        Comparator<String> c = new Comparator<>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int res = 0;
+                if (o1.compareTo(o2) > 0) res = 1;
+                else if (o1.compareTo(o2) < 0) res =-1;
+
+                return res;
+            }
+        };
+
+        assertThrows(RuntimeException.class, () -> queue.sort(c));
+    }
 }
