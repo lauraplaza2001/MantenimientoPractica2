@@ -27,6 +27,7 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
         //Node item cant be null even if it has other nodes attached/linked to it.
         if (node.getItem() == null) throw new RuntimeException("node cant be null");
         if (node.getPrevious()!= null || node.getNext() != null) throw new RuntimeException("node must not be linked");
+     //   if ((node.getItem() instanceof T)= false ) throw
 
         if ( size == 0){
 
@@ -185,35 +186,41 @@ public class DoubleLinkedListQueue <T> implements DoubleEndedQueue {
 
     @Override
     public void sort(Comparator comparator) {
-        DoubleLinkedListQueue sortedList = new DoubleLinkedListQueue();
-        int initialSize = this.size;
-        for (int i =0; i < initialSize; i++){ //  Por cada elemento de la nueva lista, vamos a ir insertando los mas pequeños
-            DequeNode menor = this.firstNode;
-            int j = 0;
+        try {
+            DoubleLinkedListQueue sortedList = new DoubleLinkedListQueue();
+            int initialSize = this.size;
+            for (int i =0; i < initialSize; i++){ //  Por cada elemento de la nueva lista, vamos a ir insertando los mas pequeños
+                DequeNode menor = this.firstNode;
+                int j = 0;
 
-            while (j < this.size()){ //Se podría sacar fuera por simplicidad
-                DequeNode newNode = this.getAt(j);
-                if (comparator.compare(menor.getItem(),newNode.getItem()) > 0){ // entiendo que da > 0 si el primer elemento es mayor que el segundo
-                    menor = newNode;
-                }
-                j++;
-            } //Obtengo el nodo menor
+                while (j < this.size()){ //Se podría sacar fuera por simplicidad
+                    DequeNode newNode = this.getAt(j);
+                    if (comparator.compare(menor.getItem(),newNode.getItem()) > 0){ // entiendo que da > 0 si el primer elemento es mayor que el segundo
+                        menor = newNode;
+                    }
+                    j++;
+                } //Obtengo el nodo menor
 
-            this.delete(menor); //borro el nodo menor de la lista, la función de borrado se encarga de quitar los enlaces del nodo
-            sortedList.append(menor);// inserto el nodo menor en la lista ordenada
+                this.delete(menor); //borro el nodo menor de la lista, la función de borrado se encarga de quitar los enlaces del nodo
+                sortedList.append(menor);// inserto el nodo menor en la lista ordenada
 
+            }
+
+            //Tendré al final la lista vacía y la lista sortedList llena con los elementos pero de menor a mayor, los inserto de nuevo en la lista
+
+            for (int i = 0; i < sortedList.size(); i++) {//Se podría sacar fuera por simplicidad
+                DequeNode node = sortedList.getAt(i);
+                sortedList.delete(node); //Se borra de sortedList lo que libera sus enlaces
+                this.append(node); //Lo inserto correctamente donde corresponde
+            }
+
+
+
+        } catch (ClassCastException e) {
+            throw new RuntimeException("ERROR, wrong comparator");
         }
 
-        //Tendré al final la lista vacía y la lista sortedList llena con los elementos pero de menor a mayor, los inserto de nuevo en la lista
-
-        for (int i = 0; i < sortedList.size(); i++) {//Se podría sacar fuera por simplicidad
-            DequeNode node = sortedList.getAt(i);
-            sortedList.delete(node); //Se borra de sortedList lo que libera sus enlaces
-            this.append(node); //Lo inserto correctamente donde corresponde
-        }
 
     }
-
-
 }
 

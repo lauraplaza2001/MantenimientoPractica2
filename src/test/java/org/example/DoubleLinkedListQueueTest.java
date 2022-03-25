@@ -332,4 +332,35 @@ class DoubleLinkedListQueueTest {
 
     }
 
+
+    // Se lanza una excepcion cuando el comparador que se le pasa no es correcto
+    @Test
+    public void testSortCatchException() {
+        DequeNode<Integer> newNode = new DequeNode<>(1, null, null);
+        DequeNode<Integer> newNode2 = new DequeNode<>(2, null, null);
+        DequeNode<Integer> newNode3 = new DequeNode<>(3, null, null);
+
+        queue.append(newNode3);
+        queue.append(newNode);
+        queue.append(newNode2);
+
+
+        Comparator<String> c = new Comparator<>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int res = 0;
+                if (o1.compareTo(o2) > 0) res = 1;
+                else if (o1.compareTo(o2) < 0) res = -1;
+
+                return res;
+            }
+        };
+
+        assertThrows(RuntimeException.class, () -> queue.sort(c));
+    }
 }
+
+
+
+
+
