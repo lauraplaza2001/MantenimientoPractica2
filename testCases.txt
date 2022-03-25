@@ -62,7 +62,8 @@ DOUBLELINKEDLISTQUEUE:
     * delete (DequeueNode d) delete the element correctly (is the last element)
     * delete (DequeueNode d) delete the element correctly (is not the first nor the last element)
 
-    * sort(Comparator c)
+    * sort(Comparator c) sort correctly
+    * sort (Comparator c )  catch ClassCastException and throw RunTimeException
 
 
 
