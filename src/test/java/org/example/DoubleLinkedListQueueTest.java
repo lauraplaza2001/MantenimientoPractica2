@@ -330,7 +330,8 @@ class DoubleLinkedListQueueTest {
     }
 
 
-
+    //Se supone que no debe pasarse nunca un comparador que no sea capaz de comparar los elemntos de la lista
+    //Por si acaso
     @Test
     public void testSortWithWrongComparator() {
         DequeNode<Integer> newNode = new DequeNode<>(1, null, null);
